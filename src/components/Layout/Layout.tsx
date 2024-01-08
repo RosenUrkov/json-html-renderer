@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect, useState } from "react";
-import { JsonDesignProperties } from "../../types";
+import { JsonBackgroundSolid, JsonDesignProperties } from "../../types";
 
 function Layout(properties: PropsWithChildren<JsonDesignProperties>) {
   const { width, height, backgroundColor, bannerSize, children } = properties;
@@ -11,7 +11,7 @@ function Layout(properties: PropsWithChildren<JsonDesignProperties>) {
         width,
         height,
         border: `1px ${backgroundColor?.type} ${backgroundColor?.borderColor}`,
-        backgroundColor: (backgroundColor as any).scolor,
+        backgroundColor: (backgroundColor as JsonBackgroundSolid).scolor,
         transform: `scale(2.5)`,
         transformOrigin: `0px 0px 0px`,
       }}
@@ -19,7 +19,6 @@ function Layout(properties: PropsWithChildren<JsonDesignProperties>) {
     >
       <div
         className="bs-helper"
-        id="e_0"
         style={{
           width,
           height,
@@ -33,7 +32,6 @@ function Layout(properties: PropsWithChildren<JsonDesignProperties>) {
       >
         <div
           className="slide"
-          id="e_1"
           style={{
             zIndex: "auto",
             opacity: 1,
@@ -43,27 +41,17 @@ function Layout(properties: PropsWithChildren<JsonDesignProperties>) {
           // style="transform: none; z-index: auto; opacity: 1; perspective: none;"
         >
           <div
-            className="eff-helper"
-            id="e_2"
+            className="slide-inner"
             style={{
-              animationPlayState: "running",
+              width: `100%`,
+              height: `100%`,
+              zIndex: 0,
+              top: 0,
+              left: 0,
             }}
-            // style="animation-play-state: running;"
+            //   style="z-index: 0; width: 100%; height: 100%; top: 0px; left: 0px;"
           >
-            <div
-              className="slide-inner"
-              id="e_3"
-              style={{
-                width: `100%`,
-                height: `100%`,
-                zIndex: 0,
-                top: 0,
-                left: 0,
-              }}
-              //   style="z-index: 0; width: 100%; height: 100%; top: 0px; left: 0px;"
-            >
-              {children}
-            </div>
+            {children}
           </div>
         </div>
       </div>

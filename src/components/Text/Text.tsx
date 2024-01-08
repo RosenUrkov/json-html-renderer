@@ -22,8 +22,6 @@ function Text({ properties }: JsonText) {
   return (
     <div
       className="element"
-      id="e_40"
-      data-layer-type="text"
       style={{
         left: x,
         top: y,
@@ -37,106 +35,60 @@ function Text({ properties }: JsonText) {
       // style="transform: translate3d(0px, 0px, 0px); left: 11px; top: 20px; width: 313.388px; height: 81.6294px; opacity: 1; mix-blend-mode: normal; pointer-events: auto;"
     >
       <div
-        className="eff-helper"
-        id="e_41"
+        className="text"
         style={{
-          animation: `${buildIn?.duration}s cubic-bezier(0.19, 1, 0.22, 1) 0s normal both running slide_buildIn_0_50_0`,
+          transform: `rotate(${rotation}deg)`,
+          opacity: opacity / 100,
+          textAlign: alignment,
+          lineHeight,
+          letterSpacing,
+          width: width * scale!,
+          height: height * scale!,
         }}
-        // style="animation: 1s cubic-bezier(0.19, 1, 0.22, 1) 0s 1 normal both running slide_buildIn_0_50_0;"
+        // transform: rotate(0deg); opacity: 1; text-align: left; line-height: 1.1; letter-spacing: 0px; width: 108.5px; height: 13.227px;
+        // style="transform: rotate(0deg); opacity: 1; text-align: center; line-height: 1.3; letter-spacing: 0px; width: 313.388px; height: 81.6294px;"
       >
         <div
-          className="move"
-          id="e_43"
-          style={{ width: "100%", height: "100%" }}
-          // style="width: 100%; height: 100%;"
+          className="innerDisplayContainer"
+          dir="ltr"
+          style={{
+            transformOrigin: "0px 0px",
+          }}
+          // style="transform-origin: 0px 0px;"
         >
-          <div
-            className="rotate"
-            id="e_44"
-            style={{ width: "100%", height: "100%" }}
-            // style="width: 100%; height: 100%;"
-          >
+          {nodes.map((node, index) => (
             <div
-              className="scale"
-              id="e_45"
-              style={{ width: "100%", height: "100%" }}
-              // style="width: 100%; height: 100%;"
+              key={index}
+              className="row"
+              style={{
+                fontWeight: node.defaultFontSettings?.fontWeight,
+                fontStyle: node.defaultFontSettings?.fontStyle,
+                fontFamily: node.defaultFontSettings?.fontFamily,
+                fontSize: fontSize * scale!,
+              }}
+              // style="font-size:31.485624174998197px;font-weight:400;font-style:normal;font-family:'Passion One';"
             >
-              <div
-                className="opacity"
-                id="e_46"
-                style={{ width: "100%", height: "100%" }}
-                // style="width: 100%; height: 100%;"
-              >
-                <div
-                  className="blur"
-                  id="e_47"
-                  style={{ width: "100%", height: "100%" }}
-                  // style="width: 100%; height: 100%;"
+              {node.children.map((child: any) => (
+                <span
+                  key={child.text}
+                  className="row-item"
+                  style={{
+                    fontStyle: child.fontSettings?.fontStyle,
+                    fontFamily: child.fontSettings?.fontFamily,
+                    fontWeight: child.fontSettings?.fontWeight,
+                    textDecoration: child.textDecoration,
+                    position: "relative",
+                    textTransform: child.textTransform,
+                    color: child.color,
+                    fontSize: fontSize * scale!,
+                  }}
+                  // style="position:relative;text-decoration:none;text-transform:none;font-family:'Passion One';font-weight:400;font-style:normal;color:#fdfdfd;font-size:31.485624174998197px;"
                 >
-                  <div
-                    className="text"
-                    id="e_42"
-                    style={{
-                      transform: `rotate(${rotation}deg)`,
-                      opacity: opacity / 100,
-                      textAlign: alignment,
-                      lineHeight,
-                      letterSpacing,
-                      width: width * scale!,
-                      height: height * scale!,
-                    }}
-                    // transform: rotate(0deg); opacity: 1; text-align: left; line-height: 1.1; letter-spacing: 0px; width: 108.5px; height: 13.227px;
-                    // style="transform: rotate(0deg); opacity: 1; text-align: center; line-height: 1.3; letter-spacing: 0px; width: 313.388px; height: 81.6294px;"
-                  >
-                    <div
-                      className="innerDisplayContainer"
-                      id="e_48"
-                      dir="ltr"
-                      style={{
-                        transformOrigin: "0px 0px",
-                      }}
-                      // style="transform-origin: 0px 0px;"
-                    >
-                      {nodes.map((node, index) => (
-                        <div
-                          key={index}
-                          className="row"
-                          style={{
-                            fontWeight: node.defaultFontSettings?.fontWeight,
-                            fontStyle: node.defaultFontSettings?.fontStyle,
-                            fontFamily: node.defaultFontSettings?.fontFamily,
-                            fontSize: fontSize * scale!,
-                          }}
-                          // style="font-size:31.485624174998197px;font-weight:400;font-style:normal;font-family:'Passion One';"
-                        >
-                          {node.children.map((child: any) => (
-                            <span
-                              key={child.text}
-                              className="row-item"
-                              style={{
-                                fontStyle: child.fontSettings?.fontStyle,
-                                fontFamily: child.fontSettings?.fontFamily,
-                                fontWeight: child.fontSettings?.fontWeight,
-                                textDecoration: child.textDecoration,
-                                position: "relative",
-                                textTransform: child.textTransform,
-                                color: child.color,
-                                fontSize: fontSize * scale!,
-                              }}
-                              // style="position:relative;text-decoration:none;text-transform:none;font-family:'Passion One';font-weight:400;font-style:normal;color:#fdfdfd;font-size:31.485624174998197px;"
-                            >
-                              {(node.children[0] as any).text}
-                            </span>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  {(node.children[0] as any).text}
+                </span>
+              ))}
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

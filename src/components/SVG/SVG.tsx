@@ -31,8 +31,6 @@ function SVG({ properties }: JsonSvg) {
   return (
     <div
       className="element"
-      id="e_39"
-      data-layer-type="svg"
       style={{
         left: x,
         top: y,
@@ -45,59 +43,14 @@ function SVG({ properties }: JsonSvg) {
       // style="transform: translate3d(0px, 0px, 0px); left: 84px; top: 137px; width: 35px; height: 24px; opacity: 1; mix-blend-mode: normal;"
     >
       <div
-        className="eff-helper"
-        id="e_40"
+        className="svg"
         style={{
-          animationPlayState: "running",
+          transform: `rotate(${rotation}deg) scale(1, 1) perspective(1px)`,
+          opacity: opacity / 100,
         }}
-        // style="animation-play-state: running;"
+        // style="transform: rotate(0deg) scale(1, 1) perspective(1px); opacity: 1;"
       >
-        <div
-          className="move"
-          id="e_42"
-          style={{ width: `100%`, height: `100%` }}
-          // style="width: 100%; height: 100%;"
-        >
-          <div
-            className="rotate"
-            id="e_43"
-            style={{ width: `100%`, height: `100%` }}
-            // style="width: 100%; height: 100%;"
-          >
-            <div
-              className="scale"
-              id="e_44"
-              style={{ width: `100%`, height: `100%` }}
-              // style="width: 100%; height: 100%;"
-            >
-              <div
-                className="opacity"
-                id="e_45"
-                style={{ width: `100%`, height: `100%` }}
-                // style="width: 100%; height: 100%;"
-              >
-                <div
-                  className="blur"
-                  id="e_46"
-                  style={{ width: `100%`, height: `100%` }}
-                  // style="width: 100%; height: 100%;"
-                >
-                  <div
-                    className="svg"
-                    id="e_41"
-                    style={{
-                      transform: `rotate(${rotation}deg) scale(1, 1) perspective(1px)`,
-                      opacity: opacity / 100,
-                    }}
-                    // style="transform: rotate(0deg) scale(1, 1) perspective(1px); opacity: 1;"
-                  >
-                    <img src={svgImageData} className="svg-img" id="e_47" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <img src={svgImageData} className="svg-img" id="e_47" />
       </div>
     </div>
   );

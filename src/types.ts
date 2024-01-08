@@ -1352,3 +1352,12 @@ export enum TextDecorationEnum {
   UNDERLINE = "underline",
   STRIKETHROUGH = "line-through",
 }
+
+// ------ CUSTOM TYPES
+
+export type Design = { hash: string; userId: string; banner: JsonDesign };
+
+export type ComponentByType = {
+  type: JsonLayerType;
+  component: React.FC;
+};
