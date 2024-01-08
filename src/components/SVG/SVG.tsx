@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { JsonButton, JsonSvg } from "../../types";
 
-function SVG({ properties }: JsonSvg) {
-  const [svgImageData, setSvgImageData] = useState("");
-
+function SVG({ properties, additionalData: svgImageData }: JsonSvg & { additionalData: string }) {
   const {
     x,
     y,
@@ -17,16 +15,6 @@ function SVG({ properties }: JsonSvg) {
     originalWidth,
     colorGroups,
   } = properties;
-
-  useEffect(() => {
-    fetch(`https://d2gla4g2ia06u2.cloudfront.net/assets/media/${url}`)
-      .then((res) => res.text())
-      .then((data) => {
-        const SVG64 = btoa(data);
-        const image64 = "data:image/svg+xml;base64," + SVG64;
-        setSvgImageData(image64);
-      });
-  }, [url]);
 
   return (
     <div

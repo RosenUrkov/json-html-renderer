@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   Design,
+  DesignData,
   JsonDesign,
   JsonDesignProperties,
   JsonElement,
@@ -17,21 +18,7 @@ import Shape from "./components/Shape/Shape";
 import SlideLayout from "./components/Layout/SlideLayout";
 import { componentsByType } from "./utils";
 
-function App() {
-  const [designProperties, setDesignProperties] =
-    useState<JsonDesignProperties>();
-  const [elementBatches, setElementBatches] = useState<JsonSlide[]>([]);
-
-  const hash = "j23y65x"; // j2308jq, y6lpqnm, j23y65x
-
-  useEffect(() => {
-    fetch(`https://creatopy-cdn-b1a8267.s3.amazonaws.com/designs/${hash}/json`)
-      .then((res) => res.json())
-      .then((design: Design) => {
-        setDesignProperties(design.banner.properties);
-        setElementBatches(design.banner.elements as JsonSlide[]);
-      });
-  }, []);
+function App({ designProperties, elementBatches, additionalElementData }: DesignData) {  
 
   return (
     <div>
@@ -52,7 +39,8 @@ function App() {
                     return <div key={el.properties.id}>No such element!</div>;
                   }
 
-                  return <Component key={el.properties.id} {...el} />;
+                  const props = { ...el, additionalData: additionalElementData[el.properties.id] };
+                  return <Component key={el.properties.id} {...props} />;
                 })}
               </SlideLayout>
             );
