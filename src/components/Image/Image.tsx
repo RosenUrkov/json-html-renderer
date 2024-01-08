@@ -15,7 +15,20 @@ function Image({ properties }: JsonImage) {
     contentOffsetY,
     url,
     dropShadow,
+    adjustColor,
   } = properties;
+
+  const dropShadowValue =
+    dropShadow?.useShadow &&
+    `drop-shadow(${dropShadow?.color} ${dropShadow?.hShadow}px ${dropShadow?.vShadow}px ${dropShadow?.blur}px)`;
+
+  const adjustColorValue =
+    adjustColor?.useAdjustColor &&
+    `brightness(1.${adjustColor.brightness}) contrast(1.${
+      adjustColor.contrast
+    }) saturate(${adjustColor.saturate + 100}) hue-rotate(${
+      adjustColor.hue
+    }deg)`;
 
   return (
     <div
@@ -44,31 +57,31 @@ function Image({ properties }: JsonImage) {
         <div
           className="move"
           id="e_7"
-          style={{ width: `100%`, height: `$100%` }}
+          style={{ width: `100%`, height: `100%` }}
           // style="width: 100%; height: 100%;"
         >
           <div
             className="rotate"
             id="e_8"
-            style={{ width: `100%`, height: `$100%` }}
+            style={{ width: `100%`, height: `100%` }}
             // style="width: 100%; height: 100%;"
           >
             <div
               className="scale"
               id="e_9"
-              style={{ width: `100%`, height: `$100%` }}
+              style={{ width: `100%`, height: `100%` }}
               // style="width: 100%; height: 100%;"
             >
               <div
                 className="opacity"
                 id="e_10"
-                style={{ width: `100%`, height: `$100%` }}
+                style={{ width: `100%`, height: `100%` }}
                 // style="width: 100%; height: 100%;"
               >
                 <div
                   className="blur"
                   id="e_11"
-                  style={{ width: `100%`, height: `$100%` }}
+                  style={{ width: `100%`, height: `100%` }}
                   // style="width: 100%; height: 100%;"
                 >
                   <div
@@ -76,7 +89,7 @@ function Image({ properties }: JsonImage) {
                     id="e_12"
                     style={{
                       width: `100%`,
-                      height: `$100%`,
+                      height: `100%`,
                       transform: `translateZ(0px) rotate(${rotation}deg) scale(1, 1)`,
                     }}
                     //   style="height: 100%; width: 100%; transform: translateZ(0px) rotate(344deg) scale(1, 1);"
@@ -86,13 +99,14 @@ function Image({ properties }: JsonImage) {
                       id="e_6"
                       style={{
                         backgroundImage: `url(//d2gla4g2ia06u2.cloudfront.net/assets/media/${url})`,
-                        filter: `drop-shadow(${dropShadow?.color} ${dropShadow?.hShadow}px ${dropShadow?.vShadow}px ${dropShadow?.blur}px)`,
+                        filter: `${adjustColorValue}`,
                         backgroundPosition: `${contentOffsetX}% ${contentOffsetY}%`,
-                        opacity: 1,
+                        opacity: opacity / 100,
                         willChange: "filter",
                         width,
                         height,
                       }}
+                      // style="background-image: url(&quot;//d2gla4g2ia06u2.cloudfront.net/assets/media/69jgj8&quot;);filter: brightness(1.21) contrast(1.13) saturate(0) hue-rotate(0deg);background-position: 50% 50%;opacity: 0.73;"
                       // style='background-image: url("//d2gla4g2ia06u2.cloudfront.net/assets/media/4dwjo1"); filter: drop-shadow(rgba(0, 0, 0, 0.27) 5px 4px 12px); will-change: filter; background-position: 50% 50%; opacity: 1;'
                     ></div>
                   </div>
