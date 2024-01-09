@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+# JSON-HTML Renderer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+**JSON-HTML Renderer** is a backend-driven web application using Node.js, React, and TypeScript, specialized in transforming JSON data into HTML content. Leveraging React's server-side rendering, it dynamically generates HTML on the backend based on JSON structures created with the Creatopy app.
+
+## Features
+
+- Dynamic rendering of various element types (text, buttons, images, svg, shape) from JSON.
+- React with Server-Side Rendering (SSR) on a Node.js backend.
+- TypeScript integration for improved code quality and type safety.
+
+## Technologies Used
+
+- React 18.2.0
+- Node.js with Express 4.18.2
+- TypeScript 5.3.3
+- Vite 5.0.10 for building the client and server
+- Jest for testing
+
+## Architecture
+
+The application is structured into two main parts: the backend (Node.js/Express) and the frontend (React).
+
+- **Backend**: The Node.js server is responsible for fetching JSON data from the Creatopy API and rendering it into HTML using React's SSR capabilities. It serves the HTML content to the client.
+
+- **Frontend**: The React application, although primarily rendered on the server, also handles any dynamic client-side interactions. It receives the pre-rendered HTML from the server and hydrates it to become a fully interactive application.
+
+- **Data Flow**: When a request is made to the server, it fetches the necessary JSON data, processes it, and uses React to generate the corresponding HTML, which is then sent to the client.
+
+- **Components**: The application consists of several React components designed to render different types of content (text, buttons, images, etc.) based on the JSON structure.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- npm (or yarn)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone git@github.com:RosenUrkov/json-html-renderer.git
+   ```
+1. Install the dependencies
+   ```bash
+   npm install
+   ```
+
+### Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+- **npm run dev**: Runs the app in development mode using Node.js.
+- **npm run build**: Builds the app for production to the dist folder.
+- **npm run preview**: Serves the production build of the app.
+- **npm run lint**: Runs ESLint to check for code quality issues.
+- **npm run test**: Runs Jest to execute tests.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Testing
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Tests are implemented using Jest and React Testing Library. Run tests with:
 
-### `npm test`
+```bash
+npm run test
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Usage
 
-### `npm run build`
+To start the application in development mode:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm run dev
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Building for Production
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To create a production build, use:
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm run build
+```

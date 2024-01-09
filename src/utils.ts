@@ -31,7 +31,10 @@ const shapeElement = {
   component: Shape,
 };
 
-export const componentsByType = [imageElement, textElement, buttonElement, svgElement, shapeElement];
+export const componentsByType = [imageElement, textElement, buttonElement, svgElement, shapeElement].reduce(
+  (map, el) => ({ ...map, [el.type]: el.component }),
+  {},
+) as { [type: string]: React.FC };
 
 export class ServerError extends Error {
   constructor(
@@ -48,37 +51,49 @@ export const getData = async (hash: string) => {
   const response = await fetch(`https://creatopy-cdn-b1a8267.s3.amazonaws.com/designs/${hash}/json`);
 
   if (response.status >= 400 && response.status < 500) {
-    throw new ServerError(400, 'The hash is not found!');
+    throw new ServerError(400, `The hash ${hash} is not found!`);
   }
   if (response.status >= 500) {
-    throw new ServerError(500, 'Oops, something went wrong.. Try with another hash!');
+    throw new ServerError(500, `An error happened during the data fetching for hash ${hash}..`);
   }
 
-  const design = (await response.json()) as Design;
+  let designProperties;
+  let elementBatches;
+  let additionalElementsData;
 
-  const designProperties = design.banner.properties as JsonDesignProperties;
-  const elementBatches = design.banner.elements as JsonSlide[];
+  try {
+    const design = (await response.json()) as Design;
 
-  const svgElementPromises = elementBatches
-    .flatMap((el) => el.elements)
-    .filter((el) => el.layerType === 'svg')
-    .map(async (el) => {
-      const res = await fetch(
-        `https://d2gla4g2ia06u2.cloudfront.net/assets/media/${(el.properties as JsonSvgProperties).url}`,
-      );
+    designProperties = design.banner.properties as JsonDesignProperties;
+    elementBatches = design.banner.elements as JsonSlide[];
 
-      if (res.status >= 400) {
-        throw new ServerError(400, `Unable to fetch the additional data for SVG with ID ${el.properties.id}!`);
-      }
+    const svgElementPromises = elementBatches
+      .flatMap((el) => el.elements)
+      .filter((el) => el.layerType === 'svg')
+      .map(async (el) => {
+        const res = await fetch(
+          `https://d2gla4g2ia06u2.cloudfront.net/assets/media/${(el.properties as JsonSvgProperties).url}`,
+        );
 
-      const data = await res.text();
-      const SVG64 = btoa(data);
-      const image64 = 'data:image/svg+xml;base64,' + SVG64;
-      return { id: el.properties.id, data: image64 };
-    });
+        if (res.status >= 400) {
+          throw new ServerError(400, `Unable to fetch the additional data for SVG with ID ${el.properties.id}!`);
+        }
 
-  const svgElementResults = await Promise.all(svgElementPromises);
-  const additionalElementsData = svgElementResults.reduce((acc, res) => ({ ...acc, [res.id]: res.data }), {});
+        const data = await res.text();
+        const SVG64 = btoa(data);
+        const image64 = 'data:image/svg+xml;base64,' + SVG64;
+        return { id: el.properties.id, data: image64 };
+      });
+
+    const svgElementResults = await Promise.all(svgElementPromises);
+    additionalElementsData = svgElementResults.reduce((acc, res) => ({ ...acc, [res.id]: res.data }), {});
+  } catch (e) {
+    if (e instanceof ServerError) {
+      throw e;
+    }
+
+    throw new ServerError(500, ` An error happened during the data processing for hash ${hash}..`);
+  }
 
   return {
     designProperties,

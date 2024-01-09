@@ -11,9 +11,7 @@ function App({ designProperties, elementBatches, additionalElementsData }: Desig
             return (
               <div key={batch.properties.bannersetElementId}>
                 {batch.elements.map((el) => {
-                  const Component = componentsByType.find((c) => c.type === el.layerType)?.component as
-                    | React.FC
-                    | undefined;
+                  const Component = componentsByType[el.layerType] as React.FC | undefined;
 
                   if (!Component) {
                     return <div key={el.properties.id}>No such element!</div>;

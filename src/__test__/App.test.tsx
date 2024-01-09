@@ -11,9 +11,7 @@ jest.mock('../components/Layout/Layout', () => {
 });
 
 jest.mock('../utils', () => ({
-  componentsByType: [
-    { type: 'text', component: (props: any) => <div data-testid="text-component">{props.children}</div> },
-  ],
+  componentsByType: { text: (props: any) => <div data-testid="text-component">{props.children}</div> },
 }));
 
 describe('App Component', () => {

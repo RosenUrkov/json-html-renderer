@@ -33,7 +33,7 @@ if (!isProduction) {
 // Serve HTML
 app.use('*', async (req, res) => {
   if (!req.query.hash) {
-    res.status(400).send('Please enter a correct hash as a query parameter!');
+    return res.status(400).send('Please enter a correct hash as a query parameter!');
   }
 
   try {
@@ -67,7 +67,6 @@ app.use('*', async (req, res) => {
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
   } catch (e) {
     vite?.ssrFixStacktrace(e);
-    console.log(e);
 
     if (!isProduction) {
       res.status(e.status || 500).end(e.stack);
