@@ -1,21 +1,8 @@
-import { JsonButton } from "../../types";
+import { JsonBackgroundSolid, JsonButton } from '../../types';
 
 function Button({ properties }: JsonButton) {
-  const {
-    x,
-    y,
-    width,
-    height,
-    opacity,
-    rotation,
-    dropShadow,
-    backgroundColor,
-    labelStyle,
-    labelOffsetX,
-    labelOffsetY,
-    buttonLabel,
-    border,
-  } = properties;
+  const { x, y, width, height, opacity, backgroundColor, labelStyle, labelOffsetX, labelOffsetY, buttonLabel, border } =
+    properties;
 
   return (
     <div
@@ -26,22 +13,18 @@ function Button({ properties }: JsonButton) {
         width,
         height,
         opacity: 1,
-        mixBlendMode: "normal",
-        pointerEvents: "auto",
-        transform: `translate3d(0px, 0px, 0px)`,
+        pointerEvents: 'auto',
       }}
-      // style="transform: translate3d(0px, 0px, 0px); left: 0px; top: 242px; width: 336px; height: 38px; opacity: 1; mix-blend-mode: normal; pointer-events: auto;"
     >
       <div
         className="bs-btn"
         style={{
           width,
           height,
-          backgroundColor: (backgroundColor as any).scolor,
+          backgroundColor: (backgroundColor as JsonBackgroundSolid).scolor,
           opacity: opacity / 100,
           borderRadius: border?.radius,
         }}
-        //   style="background-color: rgb(255, 255, 255); opacity: 1; width: 336px; height: 38px; border-radius: 1px;"
       >
         <label
           className="bs-btn-label"
@@ -56,7 +39,6 @@ function Button({ properties }: JsonButton) {
             letterSpacing: labelStyle.letterSpacing,
             color: labelStyle.color,
           }}
-          // style="margin-left: 0px; margin-top: 0px; font-family: Roboto; font-style: normal; font-weight: 700; font-size: 16px; color: rgb(0, 191, 243); letter-spacing: 0px;"
         >
           {buttonLabel}
         </label>

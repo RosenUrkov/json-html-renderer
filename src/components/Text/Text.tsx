@@ -1,4 +1,4 @@
-import { JsonText } from "../../types";
+import { JsonText, JsonTextSlateConfigChildren } from '../../types';
 
 function Text({ properties }: JsonText) {
   const {
@@ -8,14 +8,13 @@ function Text({ properties }: JsonText) {
     height,
     opacity,
     rotation,
-    dropShadow,
     blendMode,
-    buildIn,
     alignment,
     lineHeight,
     letterSpacing,
     fontSize,
     scale,
+    textDirection,
     config: { nodes },
   } = properties;
 
@@ -29,10 +28,8 @@ function Text({ properties }: JsonText) {
         height: height * scale!,
         opacity: 1,
         mixBlendMode: blendMode,
-        pointerEvents: "auto",
-        transform: `translate3d(0px, 0px, 0px)`,
+        pointerEvents: 'auto',
       }}
-      // style="transform: translate3d(0px, 0px, 0px); left: 11px; top: 20px; width: 313.388px; height: 81.6294px; opacity: 1; mix-blend-mode: normal; pointer-events: auto;"
     >
       <div
         className="text"
@@ -45,17 +42,8 @@ function Text({ properties }: JsonText) {
           width: width * scale!,
           height: height * scale!,
         }}
-        // transform: rotate(0deg); opacity: 1; text-align: left; line-height: 1.1; letter-spacing: 0px; width: 108.5px; height: 13.227px;
-        // style="transform: rotate(0deg); opacity: 1; text-align: center; line-height: 1.3; letter-spacing: 0px; width: 313.388px; height: 81.6294px;"
       >
-        <div
-          className="innerDisplayContainer"
-          dir="ltr"
-          style={{
-            transformOrigin: "0px 0px",
-          }}
-          // style="transform-origin: 0px 0px;"
-        >
+        <div className="innerDisplayContainer" dir={textDirection || 'ltr'}>
           {nodes.map((node, index) => (
             <div
               key={index}
@@ -66,9 +54,8 @@ function Text({ properties }: JsonText) {
                 fontFamily: node.defaultFontSettings?.fontFamily,
                 fontSize: fontSize * scale!,
               }}
-              // style="font-size:31.485624174998197px;font-weight:400;font-style:normal;font-family:'Passion One';"
             >
-              {node.children.map((child: any) => (
+              {(node.children as JsonTextSlateConfigChildren[]).map((child) => (
                 <span
                   key={child.text}
                   className="row-item"
@@ -77,14 +64,13 @@ function Text({ properties }: JsonText) {
                     fontFamily: child.fontSettings?.fontFamily,
                     fontWeight: child.fontSettings?.fontWeight,
                     textDecoration: child.textDecoration,
-                    position: "relative",
+                    position: 'relative',
                     textTransform: child.textTransform,
                     color: child.color,
                     fontSize: fontSize * scale!,
                   }}
-                  // style="position:relative;text-decoration:none;text-transform:none;font-family:'Passion One';font-weight:400;font-style:normal;color:#fdfdfd;font-size:31.485624174998197px;"
                 >
-                  {(node.children[0] as any).text}
+                  {(child as JsonTextSlateConfigChildren).text}
                 </span>
               ))}
             </div>

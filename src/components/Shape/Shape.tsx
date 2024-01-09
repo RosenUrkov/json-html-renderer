@@ -1,17 +1,7 @@
-import { JsonButton, JsonShape, JsonSvg } from "../../types";
+import { JsonBackgroundSolid, JsonShape } from '../../types';
 
 function Shape({ properties }: JsonShape) {
-  const {
-    x,
-    y,
-    width,
-    height,
-    opacity,
-    rotation,
-    dropShadow,
-    blendMode,
-    backgroundColor,
-  } = properties;
+  const { x, y, width, height, opacity, rotation, blendMode, backgroundColor } = properties;
 
   return (
     <div
@@ -23,18 +13,15 @@ function Shape({ properties }: JsonShape) {
         height,
         opacity: 1,
         mixBlendMode: blendMode,
-        transform: `translate3d(0px, 0px, 0px)`,
       }}
-      //style="width: 1px; height: 27px; transform: translate3d(0px, 0px, 0px); left: 128px; top: 136px; opacity: 1; mix-blend-mode: normal;"
     >
       <div
         className="shape rectangle"
         style={{
-          transform: `rotate(${rotation}deg) scale(1, 1)`,
+          transform: `rotate(${rotation}deg)`,
           opacity: opacity / 100,
-          backgroundColor: (backgroundColor as any).scolor,
+          backgroundColor: (backgroundColor as JsonBackgroundSolid).scolor,
         }}
-        // style="background-color: rgb(255, 255, 255); transform: rotate(0deg) scale(1, 1); opacity: 1;"
       ></div>
     </div>
   );

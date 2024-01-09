@@ -1,9 +1,5 @@
-import { PropsWithChildren, useEffect, useState } from "react";
-import {
-  JsonDesignProperties,
-  JsonElement,
-  JsonSlideProperties,
-} from "../../types";
+import { PropsWithChildren } from 'react';
+import { JsonSlideProperties } from '../../types';
 
 function SlideLayout(properties: PropsWithChildren<JsonSlideProperties>) {
   const { children } = properties;

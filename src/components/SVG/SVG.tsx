@@ -1,20 +1,7 @@
-import { useEffect, useState } from "react";
-import { JsonButton, JsonSvg } from "../../types";
+import { JsonSvg } from '../../types';
 
-function SVG({ properties, additionalData: svgImageData }: JsonSvg & { additionalData: string }) {
-  const {
-    x,
-    y,
-    width,
-    height,
-    opacity,
-    rotation,
-    dropShadow,
-    url,
-    originalHeight,
-    originalWidth,
-    colorGroups,
-  } = properties;
+function SVG({ properties, additionalElementData: svgImageData }: JsonSvg & { additionalElementData: string }) {
+  const { x, y, width, height, opacity, rotation } = properties;
 
   return (
     <div
@@ -25,19 +12,16 @@ function SVG({ properties, additionalData: svgImageData }: JsonSvg & { additiona
         width,
         height,
         opacity: 1,
-        mixBlendMode: "normal",
-        transform: `translate3d(0px, 0px, 0px)`,
       }}
-      // style="transform: translate3d(0px, 0px, 0px); left: 84px; top: 137px; width: 35px; height: 24px; opacity: 1; mix-blend-mode: normal;"
     >
       <div
         className="svg"
         style={{
-          transform: `rotate(${rotation}deg) scale(1, 1) perspective(1px)`,
+          transform: `rotate(${rotation}deg)`,
           opacity: opacity / 100,
         }}
-        // style="transform: rotate(0deg) scale(1, 1) perspective(1px); opacity: 1;"
       >
+        {/* eslint-disable-next-line */}
         <img src={svgImageData} className="svg-img" id="e_47" />
       </div>
     </div>

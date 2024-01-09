@@ -1353,7 +1353,7 @@ export type JsonGradColor = {
     STRIKETHROUGH = "line-through",
   }
   
-  // ------ CUSTOM TYPES
+  // ------ CUSTOM TYPES ------ 
   
   export type Design = { hash: string; userId: string; banner: JsonDesign };
   
@@ -1365,6 +1365,6 @@ export type JsonGradColor = {
   export type DesignData = {
     designProperties: JsonDesignProperties, 
     elementBatches: JsonSlide[],
-    additionalElementData: { [id: string]: string }
+    additionalElementsData: { [id: string]: string }
   }
   
