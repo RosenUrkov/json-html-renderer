@@ -5,13 +5,13 @@ function Shape({ properties }: JsonShape) {
 
   return (
     <div
+      data-testid="shape"
       className="element"
       style={{
         left: x,
         top: y,
         width,
         height,
-        opacity: 1,
         mixBlendMode: blendMode,
       }}
     >

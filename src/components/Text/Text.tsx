@@ -20,13 +20,13 @@ function Text({ properties }: JsonText) {
 
   return (
     <div
+      data-testid="text"
       className="element"
       style={{
         left: x,
         top: y,
         width: width * scale!,
         height: height * scale!,
-        opacity: 1,
         mixBlendMode: blendMode,
         pointerEvents: 'auto',
       }}

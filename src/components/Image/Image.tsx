@@ -28,13 +28,13 @@ function Image({ properties }: JsonImage) {
 
   return (
     <div
+      data-testid="image"
       className="element"
       style={{
         left: x,
         top: y,
         width,
         height,
-        opacity: 1,
         mixBlendMode: blendMode,
       }}
     >

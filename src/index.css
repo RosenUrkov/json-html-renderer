@@ -109,6 +109,7 @@ html {
   position: absolute;
   perspective-origin: center;
   transform: translate3d(0, 0, 0);
+  opacity: 1;
   -webkit-perspective-origin: center;
 }
 

@@ -1,6 +1,5 @@
 import { DesignData } from './types';
 import Layout from './components/Layout/Layout';
-import SlideLayout from './components/Layout/SlideLayout';
 import { componentsByType } from './utils';
 
 function App({ designProperties, elementBatches, additionalElementsData }: DesignData) {
@@ -10,7 +9,7 @@ function App({ designProperties, elementBatches, additionalElementsData }: Desig
         <Layout {...designProperties}>
           {elementBatches.map((batch) => {
             return (
-              <SlideLayout key={batch.properties.bannersetElementId} {...batch.properties}>
+              <div key={batch.properties.bannersetElementId}>
                 {batch.elements.map((el) => {
                   const Component = componentsByType.find((c) => c.type === el.layerType)?.component as
                     | React.FC
@@ -23,7 +22,7 @@ function App({ designProperties, elementBatches, additionalElementsData }: Desig
                   const props = { ...el, additionalElementData: additionalElementsData[el.properties.id] };
                   return <Component key={el.properties.id} {...props} />;
                 })}
-              </SlideLayout>
+              </div>
             );
           })}
         </Layout>

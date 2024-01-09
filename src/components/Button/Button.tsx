@@ -6,13 +6,13 @@ function Button({ properties }: JsonButton) {
 
   return (
     <div
+      data-testid="button"
       className="element"
       style={{
         left: x,
         top: y,
         width,
         height,
-        opacity: 1,
         pointerEvents: 'auto',
       }}
     >

@@ -6,6 +6,7 @@ function Layout(properties: PropsWithChildren<JsonDesignProperties>) {
 
   return (
     <div
+      data-testid="layout"
       id="bs"
       style={{
         width,

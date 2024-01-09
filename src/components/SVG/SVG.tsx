@@ -5,13 +5,13 @@ function SVG({ properties, additionalElementData: svgImageData }: JsonSvg & { ad
 
   return (
     <div
+      data-testid="svg"
       className="element"
       style={{
         left: x,
         top: y,
         width,
         height,
-        opacity: 1,
       }}
     >
       <div
