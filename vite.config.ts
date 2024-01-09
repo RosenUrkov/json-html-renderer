@@ -1,14 +1,8 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import eslintPlugin from 'vite-plugin-eslint';
-import polyfillNode from 'rollup-plugin-polyfill-node';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import eslintPlugin from 'vite-plugin-eslint'
 
 export default defineConfig({
-  build: {
-    rollupOptions: {
-      plugins: [polyfillNode()],
-    },
-  },
   plugins: [
     react(),
     eslintPlugin({
@@ -17,4 +11,4 @@ export default defineConfig({
       exclude: [],
     }),
   ],
-});
+})
