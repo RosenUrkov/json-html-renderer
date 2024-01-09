@@ -68,16 +68,15 @@ npm run test
 
 ### Usage
 
-To start the application in development mode:
+To start the application:
 
 ```bash
 npm run dev
 ```
 
-### Building for Production
-
-To create a production build, use:
+or
 
 ```bash
-npm run build
+npm run start
 ```
+
