@@ -15,7 +15,7 @@
 - React 18.2.0
 - Node.js with Express 4.18.2
 - TypeScript 5.3.3
-- Vite 5.0.10 for building the client and server
+- Vite 4.2.0 for building the client and server
 - Jest for testing
 
 ## Architecture
