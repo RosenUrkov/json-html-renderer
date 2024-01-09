@@ -80,3 +80,6 @@ or
 npm run start
 ```
 
+After you start it, you need to provide a **hash** as a query parameter in order to observe the design behind it. You can try with the following: **j2308jq, y6lpqnm, j23y65x**.
+
+**Example: http://localhost:5173/?hash=j2308jq**

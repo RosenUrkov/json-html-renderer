@@ -68,11 +68,7 @@ app.use('*', async (req, res) => {
   } catch (e) {
     vite?.ssrFixStacktrace(e);
 
-    if (!isProduction) {
-      res.status(e.status || 500).end(e.stack);
-    } else {
-      res.status(e.status || 500).send(e.message);
-    }
+    res.status(e.status || 500).send(e.message);
   }
 });
 
